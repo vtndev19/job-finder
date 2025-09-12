@@ -1,0 +1,100 @@
+@import '../global.scss';
+
+.banner {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  padding: 8% 0; // Using percentage for padding
+  width: 100%; // Full width
+  position: relative;
+  
+  .banner-content {
+    width: 90%; // Responsive width
+    margin: 0 auto; // Center the content
+    text-align: center;
+    color: #ffffff;
+    padding: 0 2%;
+
+    h2 {
+      font-size: 40px; // explicit pixel size for readability
+      font-weight: $font-bold;
+      margin-bottom: $spacing-lg; // use spacing token
+      line-height: 1.2;
+      text-shadow: 0 2px 4px rgba($black, 0.2);
+
+      @include desktop {
+        font-size: 48px;
+      }
+
+      @include tablet {
+        font-size: 40px;
+      }
+
+      @include mobile {
+        font-size: 28px;
+      }
+    }
+
+    p {
+      font-size: $font-size-lg; // 18px by token
+      margin-bottom: $spacing-xl;
+      opacity: 0.95;
+      width: 70%; // responsive width
+      margin-left: auto;
+      margin-right: auto;
+      line-height: $line-height-normal;
+
+      @include mobile {
+        width: 90%;
+        font-size: $font-size-base;
+      }
+    }
+
+    .banner-actions {
+      display: flex;
+      gap: $spacing-lg; // Increased gap
+      justify-content: center;
+      margin-top: $spacing-xl; // Added top margin
+
+      button {
+        padding: $spacing-md $spacing-lg; // balanced padding
+        font-size: $font-size-base;
+        font-weight: $font-semibold;
+        border-radius: $radius-md;
+        transition: $transition-smooth;
+        min-width: 140px;
+
+        &:first-child {
+          background: $white;
+          color: $primary;
+          border: none;
+
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: $shadow-lg;
+          }
+        }
+
+        &.outline {
+          background: transparent;
+          color: $white;
+          border: 2px solid $white;
+
+          &:hover {
+            background: rgba($white, 0.1);
+            transform: translateY(-3px);
+          }
+        }
+      }
+
+      @include mobile {
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-md;
+
+        button {
+          width: 80%;
+          max-width: 320px;
+        }
+      }
+    }
+  }
+}

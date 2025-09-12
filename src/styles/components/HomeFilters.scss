@@ -1,0 +1,64 @@
+.filters {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 2rem 0;
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      min-width: 100px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    select {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: #1f2937;
+      background-color: #f9fafb;
+      transition: all 0.2s ease;
+      
+      &:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+      
+      &:hover {
+        border-color: #9ca3af;
+      }
+
+      option {
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    padding: 1rem;
+    
+    .filter-group {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      
+      label {
+        min-width: auto;
+      }
+    }
+  }
+}
