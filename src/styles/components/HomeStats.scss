@@ -1,0 +1,38 @@
+// src/styles/components/HomeStats.scss
+@import '../global.scss';
+
+.home-stats-container {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-2xl;
+  margin-top: $spacing-2xl;
+  padding: $spacing-lg;
+  background: rgba($white, 0.1);
+  border-radius: $radius-lg;
+  -webkit-backdrop-filter: blur(10px); // For Safari
+  backdrop-filter: blur(10px);
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-lg;
+    align-items: center;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $white;
+    text-shadow: 0 1px 3px rgba($black, 0.2);
+
+    .stat-number {
+      font-size: $font-size-3xl;
+      font-weight: $font-bold;
+    }
+
+    .stat-label {
+      font-size: $font-size-base;
+      opacity: 0.9;
+    }
+  }
+}

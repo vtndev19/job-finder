@@ -1,24 +1,31 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/components/HomeJobs.scss';
 
-export default function HomeJobs({ jobs }) {
+const HomeJobs = ({ jobs }) => {
     return (
-        <div className="jobs container">
-            <h3>Kết quả tìm kiếm ({jobs.length})</h3>
-            {jobs.length === 0 && <p>Không có việc phù hợp.</p>}
-            <ul className="job-list">
+        <div className="home-jobs-container">
+            <h2>Việc làm nổi bật</h2>
+            {jobs.length === 0 && <p>Không có việc làm nào phù hợp với tìm kiếm của bạn.</p>}
+            <div className="job-list">
                 {jobs.map(job => (
-                    <li className="job-card" key={job.id}>
-                        <h4>{job.title}</h4>
-                        <p><strong>Thành phố:</strong> {job.city} — <strong>Ngành:</strong> {job.industry}</p>
-                        <p className="meta">Đăng: {job.uploadedAt} · Quan tâm: {job.hrPosts} lượt</p>
-                        <div className="job-actions">
-                            <button>Ứng tuyển</button>
-                            <button className="outline">Lưu</button>
+                    <Link to={`/job/${job.id}`} key={job.id} className="job-card">
+                        <div className="job-card-header">
+                            <h3>{job.title}</h3>
+                            <span className="job-salary">{job.salary}</span>
                         </div>
-                    </li>
+                        <div className="job-card-company">
+                            <span>{job.company}</span>
+                        </div>
+                        <div className="job-card-footer">
+                            <span className="job-location">{job.location}</span>
+                            <span className="job-posted-date">{new Date(job.posted_date).toLocaleDateString('vi-VN')}</span>
+                        </div>
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </div>
     );
-}
+};
+
+export default HomeJobs;

@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/components/HomeBanner.scss';
+import HomeStats from "./HomeStats";
 
 export default function HomeBanner() {
     return (
@@ -11,6 +12,7 @@ export default function HomeBanner() {
                     <button>Đăng CV</button>
                     <button className="outline">Đăng tin tuyển dụng</button>
                 </div>
+                <HomeStats />
             </div>
         </div>
     );

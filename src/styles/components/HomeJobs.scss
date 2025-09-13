@@ -1,99 +1,87 @@
-.jobs {
-  padding: 2rem 0;
+@import '../global.scss';
 
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 1.5rem;
+.home-jobs-container {
+  padding: $spacing-2xl 0;
+
+  h2 {
+    font-size: $font-size-3xl;
+    font-weight: $font-bold;
+    color: $text-dark;
+    margin-bottom: $spacing-xl;
+    text-align: center;
   }
 
   .job-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: $spacing-lg;
+    text-decoration: none;
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 
-    .job-card {
-      background: #ffffff;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .job-card {
+    background: $white;
+    border-radius: $radius-lg;
+    padding: $spacing-lg;
+    box-shadow: $shadow-md;
+    transition: $transition-smooth;
+    border: 1px solid $gray-200;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-lg;
+      border-color: $primary;
+    }
+
+    .job-card-header {
+      margin-bottom: $spacing-md;
       
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      h3 {
+        font-size: $font-size-lg;
+        font-weight: $font-semibold;
+        color: $text-dark;
+        margin-bottom: $spacing-xs;
+        line-height: 1.4;
       }
 
-      h4 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #111827;
-        margin-bottom: 1rem;
-      }
-
-      p {
-        color: #4b5563;
-        margin-bottom: 0.75rem;
-        line-height: 1.5;
-
-        &.meta {
-          font-size: 0.875rem;
-          color: #6b7280;
-        }
-
-        strong {
-          color: #374151;
-        }
-      }
-
-      .job-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-
-        button {
-          flex: 1;
-          padding: 0.75rem 1rem;
-          border-radius: 0.5rem;
-          font-weight: 500;
-          transition: all 0.2s ease;
-          
-          &:first-child {
-            background: #6366f1;
-            color: #ffffff;
-            border: none;
-            
-            &:hover {
-              background: #4f46e5;
-            }
-          }
-
-          &.outline {
-            background: transparent;
-            border: 1px solid #6366f1;
-            color: #6366f1;
-            
-            &:hover {
-              background: rgba(99, 102, 241, 0.05);
-            }
-          }
-        }
+      .job-salary {
+        font-size: $font-size-base;
+        font-weight: $font-medium;
+        color: $success;
       }
     }
+
+    .job-card-company {
+      margin-bottom: $spacing-lg;
+      color: $text-light;
+      font-size: $font-size-sm;
+    }
+
+    .job-card-footer {
+      margin-top: auto; // Pushes footer to the bottom
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: $font-size-sm;
+      color: $text-muted;
+    }
   }
-}
 
-@media (max-width: 768px) {
-  .jobs {
-    padding: 1rem 0;
+  @include tablet {
+    .job-list {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
 
+  @include mobile {
     .job-list {
       grid-template-columns: 1fr;
-      gap: 1rem;
     }
   }
 }
+

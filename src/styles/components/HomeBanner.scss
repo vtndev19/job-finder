@@ -2,16 +2,17 @@
 
 .banner {
   background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
-  padding: 8% 0; // Using percentage for padding
-  width: 100%; // Full width
+  padding: $spacing-2xl 0; // Use a fixed but generous spacing token
+  width: 100%;
   position: relative;
   
   .banner-content {
     width: 90%; // Responsive width
+    max-width: $container-max-width; // Ensure it doesn't get too wide
     margin: 0 auto; // Center the content
     text-align: center;
     color: #ffffff;
-    padding: 0 2%;
+    padding: 0 $container-padding;
 
     h2 {
       font-size: 40px; // explicit pixel size for readability

@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/components/Homesearch.scss';
 
 export default function HomeSearch({ keyword, setKeyword }) {
     return (
@@ -8,7 +9,7 @@ export default function HomeSearch({ keyword, setKeyword }) {
                 onChange={(e) => setKeyword(e.target.value)}
                 placeholder="Tìm kiếm theo từ khóa..."
             />
-            <button>Tìm kiếm</button>
+            <button className="search-bar__button">Tìm kiếm</button>
         </div>
     );
 }

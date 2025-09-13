@@ -31,6 +31,9 @@ $gray-300: #d1d5db;
 $gray-400: #9ca3af;
 $gray-500: #6b7280;
 
+$primary-white: #ffffff;
+$primary-blue: #3b82f6;
+
 
 // -----------------------------------------------------------------------------
 // #TYPOGRAPHY
@@ -128,9 +131,15 @@ body {
   box-sizing: border-box;
 }
 
+// Container
+$container-padding: 2%; // Use percentage for padding
+$container-max-width: 1600px; // Increased max-width for large screens
+
+// ... existing code ...
+
 // Main container for centering content
 .container {
-  width: 100%;
+  width: 90%; // Use percentage for a wider, responsive container
   max-width: $container-max-width;
   margin-left: auto;
   margin-right: auto;

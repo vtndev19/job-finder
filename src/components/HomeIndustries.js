@@ -16,7 +16,7 @@ export default function HomeIndustries({ jobs }) {
         <div className="industries container">
             <div className="grid-2">
                 <section>
-                    <h4>Ngành mới upload gần đây</h4>
+                    <h4>Ngành nổi bật</h4>
                     <ul>
                         {newest.map(i => (
                             <li key={i.name}>

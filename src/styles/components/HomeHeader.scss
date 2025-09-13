@@ -1,14 +1,14 @@
 @import '../global.scss';
 
 .header {
-  background: $white;
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: $shadow-md;
   padding: $spacing-md 0;
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid $gray-100;
-  -webkit-backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); // Added for Safari support
   backdrop-filter: blur(8px);
   transition: $transition-smooth;
 
@@ -16,170 +16,198 @@
     box-shadow: $shadow-lg;
   }
 
-  .container {
+  .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 $spacing-md;
-  }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
+    .brand {
+      display: flex;
+      align-items: center;
 
-    img {
-      height: 40px;
-      width: auto;
-    }
-
-    h1 {
-      font-size: $font-size-xl; // Sử dụng biến cho nhất quán
-      font-weight: $font-bold;
-      color: $primary;
-      margin: 0;
-    }
-  }
-
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xl;
-
-    .nav-link {
-      text-decoration: none;
-      color: $text-dark;
-      font-weight: $font-medium;
-      transition: $transition-smooth;
-      position: relative;
-      padding: $spacing-xs $spacing-sm;
-
-      // Định nghĩa gạch chân dùng chung cho hover và active
-      &::before {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, $primary, $primary-light);
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 0.3s ease;
-      }
-
-      &:hover {
+      a {
+        text-decoration: none;
         color: $primary;
 
-        &::before {
-          transform: scaleX(1);
-          transform-origin: left;
-        }
-      }
-
-      // Sửa lại logic cho .active để tái sử dụng ::before
-      &.active {
-        color: $primary;
-
-        &::before {
-          transform: scaleX(1);
-          transform-origin: left; // Thêm để nhất quán
+        h1 {
+          font-size: $font-size-xl;
+          font-weight: $font-bold;
+          color: $primary;
+          margin: 0;
         }
       }
     }
 
-    .auth-buttons {
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xl;
+
+      > a {
+        text-decoration: none;
+        color: $text-dark;
+        font-weight: $font-medium;
+        transition: $transition-smooth;
+        position: relative;
+        padding: $spacing-xs $spacing-sm;
+
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(to right, $primary, $primary-light);
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover, &.active {
+          color: $primary;
+
+          &::before {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+
+      .jobs-menu-item {
+        position: relative;
+
+        > a {
+          text-decoration: none;
+          color: $text-dark;
+          font-weight: $font-medium;
+          transition: $transition-smooth;
+          position: relative;
+          padding: $spacing-xs $spacing-sm;
+
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, $primary, $primary-light);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover {
+            color: $primary;
+
+            &::before {
+              transform: scaleX(1);
+              transform-origin: left;
+            }
+          }
+        }
+
+        .jobs-dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          border-radius: $radius-md;
+          box-shadow: $shadow-lg;
+          padding: $spacing-sm 0;
+          margin-top: $spacing-sm;
+          min-width: 300px;
+          z-index: 1001;
+          background-color: rgb(193, 221, 253);
+          transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+          transition-delay: 0s, 0s, 1s; // Ẩn sau 300ms
+
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            
+            li {
+              width: 100%;
+
+              a {
+                display: block;
+                padding: $spacing-sm $spacing-md;
+                color: $text-dark;
+                white-space: nowrap;
+                text-decoration: none;
+                font-weight: $font-medium;
+                transition: $transition-smooth;
+
+                &::before {
+                  display: none; // Hide the underline effect from parent
+                }
+
+                &:hover {
+                  background-color: $gray-100;
+                  color: $primary;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .auth {
       display: flex;
       gap: $spacing-md;
 
-      button {
+      .btn {
         padding: $spacing-sm $spacing-lg;
         border-radius: $radius-md;
         font-weight: $font-semibold;
         font-size: $font-size-sm;
         transition: $transition-smooth;
-        position: relative;
-        overflow: hidden;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        background: $primary;
+        color: $white;
+        border: 1px solid $primary;
 
-        &::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          background: rgba($white, 0.1);
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          transition: width 0.6s ease, height 0.6s ease;
+        &:hover {
+          background: $primary-dark;
+          border-color: $primary-dark;
+          box-shadow: $shadow-md;
         }
 
-        &:hover::before {
-          width: 300px;
-          height: 300px;
-        }
-
-        &.login {
+        &.outline {
           background: transparent;
           color: $primary;
-          border: 2px solid $primary;
+          border: 1px solid $gray-300;
 
           &:hover {
-            background: rgba($primary, 0.05);
-            border-color: $primary-dark;
+            background: $gray-100;
+            border-color: $gray-400;
             color: $primary-dark;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba($primary, 0.15);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-
-        &.register {
-          background: linear-gradient(135deg, $primary, $primary-dark);
-          color: $white;
-          border: none;
-
-          &:hover {
-            background: linear-gradient(135deg, $primary-dark, $primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba($primary, 0.3);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-
-        &:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none !important;
-          box-shadow: none !important;
-
-          &:hover::before {
-            display: none;
+            box-shadow: none;
           }
         }
       }
     }
   }
 
-  // Ẩn nút menu trên desktop theo mặc định
   .menu-button {
     display: none;
     background: none;
     border: none;
-    font-size: $font-size-xl;
-    color: $text-dark;
+    font-size: $font-size-lg;
     cursor: pointer;
-
+    color: $text-dark;
+    
     &:hover {
       color: $primary;
     }
@@ -189,43 +217,56 @@
 // Responsive Design
 @media (max-width: $tablet) {
   .header {
-    .nav-menu {
-      display: none; // Trạng thái mặc định là ẩn
-      position: fixed;
-      top: 70px; // Hoặc bằng chiều cao của header
-      left: 0;
-      right: 0;
-      background: $white;
-      padding: $spacing-md;
-      flex-direction: column;
-      gap: $spacing-md;
-      box-shadow: $shadow-md;
-      z-index: 999; // Giữ z-index thấp hơn header để không che mất
+    .header-inner {
+      .nav {
+        display: none;
+        
+        &.active {
+          display: flex;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: $white;
+          padding: $spacing-md;
+          flex-direction: column;
+          gap: $spacing-md;
+          box-shadow: $shadow-md;
+          z-index: 999;
+          align-items: flex-start;
 
-      // Khi có class .active (được thêm bằng JS) thì menu hiện ra
-      &.active {
-        display: flex;
-      }
+          .jobs-menu-item {
+            width: 100%;
 
-      .nav-link {
-        width: 100%;
-        text-align: center;
-        padding: $spacing-sm 0;
-      }
-
-      .auth-buttons {
-        flex-direction: column;
-        width: 100%;
-
-        button {
-          width: 100%;
+            .jobs-dropdown {
+              position: static;
+              box-shadow: none;
+              border-top: 1px solid $gray-100;
+              margin-top: $spacing-sm;
+              padding-top: $spacing-sm;
+              min-width: unset;
+              width: 100%;
+              background: transparent;
+            }
+          }
         }
       }
-    }
-    
-    // Hiển thị nút menu trên màn hình nhỏ
-    .menu-button {
-      display: block;
+      
+      .auth {
+        display: none;
+        
+        &.active {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: $spacing-md;
+          margin-top: $spacing-md;
+        }
+      }
+
+      .menu-button {
+        display: block;
+      }
     }
   }
 }
