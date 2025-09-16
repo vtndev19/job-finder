@@ -80,51 +80,60 @@
       box-shadow: $shadow-xl;
     }
 
-    .job-card-header {
-      flex: 1;
-      padding: $spacing-lg;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      
-      h3 {
-        font-size: $font-size-xl;
-        font-weight: $font-bold;
-        margin: 0 0 $spacing-xs 0;
-        line-height: 1.4;
-        color: $text-dark;
-      }
-
-      .job-salary {
-        font-size: $font-size-base;
-        font-weight: $font-semibold;
-        color: $primary;
-      }
-    }
-
-    .job-card-body {
-      padding: $spacing-lg;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .job-card-company {
-      margin-bottom: $spacing-md;
-      color: $text-light;
-      font-weight: $font-medium;
-    }
-
-    .job-card-footer {
-      margin-top: auto;
-      padding-top: $spacing-md;
-      border-top: 1px solid $gray-100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: $font-size-sm;
-      color: $text-muted;
-    }
-  }
+  .job-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;       // đảm bảo các cột bằng chiều cao
+  width: 100%;
 }
 
+.job-card-header {
+  flex: 0 0 50%;              // cố định 60% chiều ngang
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+}
+
+.job-card-body {
+  flex: 0 0 30%;              // cố định 30% chiều ngang
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-card-company {
+  margin-bottom: $spacing-md;
+  color: $text-light;
+  font-weight: $font-medium;
+  flex: 0 0 auto;    
+           // không co giãn
+}
+
+.job-card-footer {
+  flex: 0 10% 20%;              // cố định 10% chiều ngang
+  margin-top: auto;
+  padding-top: $spacing-md;
+ 
+  display: flex;
+  flex-direction: column;   
+  justify-content: flex-start;  // căn trái
+  align-items: center;
+  font-size: $font-size-sm;
+  color: $text-muted;
+  }
+  .job-location{
+    
+  }
+  .job-posted-date{
+    border-top: 1px solid $gray-100;
+    display: flex;
+    flex-direction: row;  
+    margin-bottom: 3%;
+    color: rgb(138, 202, 245);
+  }
+  #job-posted-date-tile{
+    padding-right: 3px;
+  }
+} 
+}

@@ -1,41 +1,24 @@
 import React from "react";
+import data from "../data/db.json"; // đường dẫn đến file json
 
-export default function HomeIndustries({ jobs }) {
-    const byIndustry = jobs.reduce((acc, j) => {
-        if (!acc[j.industry]) acc[j.industry] = { name: j.industry, latest: j.uploadedAt, score: 0 };
-        acc[j.industry].score += j.hrPosts;
-        if (new Date(j.uploadedAt) > new Date(acc[j.industry].latest)) acc[j.industry].latest = j.uploadedAt;
-        return acc;
-    }, {});
-
-    const industriesArr = Object.values(byIndustry);
-    const newest = industriesArr.sort((a, b) => new Date(b.latest) - new Date(a.latest)).slice(0, 4);
-    const popular = industriesArr.sort((a, b) => b.score - a.score).slice(0, 4);
+export default function HomeIndustries() {
+    const industries = data.industries;
 
     return (
         <div className="industries container">
-            <div className="grid-2">
-                <section>
-                    <h4>Ngành nổi bật</h4>
-                    <ul>
-                        {newest.map(i => (
-                            <li key={i.name}>
-                                <strong>{i.name}</strong> — mới nhất: {i.latest}
-                            </li>
-                        ))}
-                    </ul>
-                </section>
-
-                <section>
-                    <h4>Ngành được quan tâm nhiều</h4>
-                    <ul>
-                        {popular.map(i => (
-                            <li key={i.name}>
-                                <strong>{i.name}</strong> — lượt quan tâm: {i.score}
-                            </li>
-                        ))}
-                    </ul>
-                </section>
+            <h3 className="mb-4">Top ngành nghề nổi bật</h3>
+            <div className="grid grid-cols-4 gap-4">
+                {industries.map(ind => (
+                    <div
+                        key={ind.id}
+                        className="p-4 bg-gray-100 rounded-lg flex flex-col items-center shadow hover:shadow-md transition"
+                    >
+                        {/* Icon có thể custom theo ngành, tạm thời chỉ text */}
+                        <div className="text-3xl mb-2">🏷️</div>
+                        <h4 className="font-semibold text-center">{ind.name}</h4>
+                        <p className="text-green-600">{ind.job_count.toLocaleString()} việc làm</p>
+                    </div>
+                ))}
             </div>
         </div>
     );

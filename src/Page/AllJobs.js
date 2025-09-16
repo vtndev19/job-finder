@@ -77,12 +77,18 @@ const AllJobs = () => {
                                 <h3>{job.title}</h3>
                                 <span className="job-salary">{job.salary}</span>
                             </div>
-                            <div className="job-card-company">
-                                <span>{job.company}</span>
+
+                            <div className="job-card-body">
+                                <div className="job-card-company">
+                                    <span className="company-name">{job.company}</span>
+                                </div>
                             </div>
                             <div className="job-card-footer">
-                                <span className="job-location">{job.location}</span>
-                                <span className="job-posted-date">{new Date(job.posted_date).toLocaleDateString('vi-VN')}</span>
+                                <span className="job-location">{job.location}:</span>
+                                <span className="job-posted-date">
+                                    <span id="job-posted-date-tile">Đăng ngày: </span>
+                                    {new Date(job.posted_date).toLocaleDateString('vi-VN')}
+                                </span>
                             </div>
                         </Link>
                     ))
