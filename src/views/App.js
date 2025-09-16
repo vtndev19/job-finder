@@ -10,11 +10,14 @@ import HomeJobs from "../components/HomeJobs";
 import HomeIndustries from "../components/HomeIndustries";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat";
+import CompanyDetail from "../components/CompanyDetail";
 /* Views */
 import Login from "../Page/Login";
 import Register from "../Page/Register";
 import JobDetail from "../Page/JobDetail";
 import AllJobs from '../Page/AllJobs';
+import CompanyPage from "../Page/CompanyPage";
+
 
 /* Styles */
 import "../styles/global.scss";
@@ -35,6 +38,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/jobs" element={<AllJobs />} />
           <Route path="/job/:jobId" element={<JobDetail />} />
+          <Route path="/companies" element={<CompanyPage />} />
         </Routes>
       </main>
       <Chat />
