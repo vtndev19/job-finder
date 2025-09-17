@@ -2,15 +2,18 @@
 @import '../global.scss';
 
 .home-stats-container {
-  display: flex;
+   display: flex;
   justify-content: center;
   gap: $spacing-2xl;
-  margin-top: $spacing-2xl;
-  padding: $spacing-lg;
+  margin: $spacing-2xl auto 0 auto;
+  padding: $spacing-md $spacing-lg; // giảm padding so với trước
   background: rgba($white, 0.1);
   border-radius: $radius-lg;
-  -webkit-backdrop-filter: blur(10px); // For Safari
+  -webkit-backdrop-filter: blur(10px); 
   backdrop-filter: blur(10px);
+  height: auto; // để container tự co theo nội dung
+  max-width: 1200px;
+  width: 50%;
 
   @include mobile {
     flex-direction: column;

@@ -7,9 +7,9 @@ import HomeSearch from "../components/HomeSearch";
 import HomeBanner from "../components/HomeBanner";
 import HomeFilters from "../components/HomeFilters";
 import HomeJobs from "../components/HomeJobs";
-import HomeIndustries from "../components/HomeIndustries";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat";
+import FeaturedIndustries from '../components/FeaturedIndustries';
 /* Views */
 import Login from "../Page/Login";
 import Register from "../Page/Register";
@@ -74,7 +74,8 @@ function HomeMain({ jobs }) {
             setIndustryFilter={setIndustryFilter}
           />
           <HomeJobs jobs={filtered.slice(0, 10)} />
-          <HomeIndustries jobs={jobs} />
+          <FeaturedIndustries jobs={jobs} />
+
         </section>
       </div>
     </>

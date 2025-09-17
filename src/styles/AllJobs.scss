@@ -52,7 +52,7 @@
     text-decoration: none;
     list-style: none;
     padding: 0;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -86,7 +86,10 @@
   align-items: stretch;       // đảm bảo các cột bằng chiều cao
   width: 100%;
 }
-
+.job-salary{
+  color: rgb(0, 172, 100);
+  font-style: italic;
+}
 .job-card-header {
   flex: 0 0 50%;              // cố định 60% chiều ngang
   padding: $spacing-lg;

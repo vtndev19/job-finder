@@ -3,8 +3,8 @@
 // -----------------------------------------------------------------------------
 // #COLOR SYSTEM
 // -----------------------------------------------------------------------------
-$primary: #6366f1;
-$primary-dark: #4f46e5;
+$primary: #0026ff;
+$primary-dark: #0058cc;
 $primary-light: #818cf8;
 
 $secondary: #3b82f6;
@@ -33,6 +33,14 @@ $gray-500: #6b7280;
 
 $primary-white: #ffffff;
 $primary-blue: #3b82f6;
+// -----------------------------------------------------------------------------
+// #EXTRA COLORS (bổ sung cho FeaturedIndustries)
+// -----------------------------------------------------------------------------
+$success-dark: darken($success, 15%);  // xanh đậm hơn success
+$warning-dark: darken($warning, 15%);  // vàng đậm hơn warning
+$info: #0ea5e9;                        // xanh cyan (giống Tailwind info-500)
+$info-dark: darken($info, 15%);        // xanh cyan đậm
+
 
 
 // -----------------------------------------------------------------------------
