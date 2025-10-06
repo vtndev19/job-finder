@@ -1,0 +1,102 @@
+.jobnews {
+  padding: 20px;
+
+  .jobnews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  }
+
+  .jobnews-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .jobnews-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 16px;
+
+    .jobnews-card-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 20px;
+
+      .jobnews-text {
+        flex: 1;
+
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 8px;
+        }
+
+        p {
+          color: #555;
+          margin-bottom: 12px;
+        }
+
+        .jobnews-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          span {
+            font-size: 0.85rem;
+            color: #777;
+          }
+
+          button {
+            align-self: start;
+            padding: 6px 12px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+          }
+
+          button:hover {
+            background: #0056b3;
+          }
+        }
+      }
+
+      .jobnews-image {
+        flex-shrink: 0;
+        width: 40%;
+        aspect-ratio: 20 / 9;
+        overflow: hidden;
+        border-radius: 12px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .jobnews-empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+  }
+}

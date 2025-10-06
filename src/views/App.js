@@ -9,6 +9,7 @@ import HomeFilters from "../components/HomeFilters";
 import HomeJobs from "../components/HomeJobs";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat";
+import { JobNews } from "../components/JobNews";
 import FeaturedIndustries from '../components/FeaturedIndustries';
 /* Views */
 import Login from "../Page/Login";
@@ -74,6 +75,7 @@ function HomeMain({ jobs }) {
             setIndustryFilter={setIndustryFilter}
           />
           <HomeJobs jobs={filtered.slice(0, 10)} />
+          <JobNews articles={db.articles} isLoading={false} />
           <FeaturedIndustries jobs={jobs} />
 
         </section>
