@@ -3,26 +3,21 @@ import { Routes, Route } from "react-router-dom";
 
 /* Components */
 import HomeHeader from "../components/HomeHeader";
-import HomeSearch from "../components/HomeSearch";
-import HomeBanner from "../components/HomeBanner";
-import HomeFilters from "../components/HomeFilters";
-import HomeJobs from "../components/HomeJobs";
+import Home from "../Page/Home";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat";
-import { JobNews } from "../components/JobNews";
-import FeaturedIndustries from '../components/FeaturedIndustries';
 /* Views */
 import Login from "../Page/Login";
 import Register from "../Page/Register";
 import JobDetail from "../Page/JobDetail";
 import AllJobs from '../Page/AllJobs';
+import Profile from '../Page/Profile';
 
 /* Styles */
 import "../styles/global.scss";
 import "../styles/Home.scss";
 
 /* Mock data */
-import db from '../data/db.json';
 
 /* App chính */
 export default function App() {
@@ -31,11 +26,12 @@ export default function App() {
       <HomeHeader siteName="JobFinder" />
       <main>
         <Routes>
-          <Route path="/" element={<HomeMain jobs={db.jobs} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/jobs" element={<AllJobs />} />
           <Route path="/job/:jobId" element={<JobDetail />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
       <Chat />
@@ -44,7 +40,26 @@ export default function App() {
   );
 }
 
-/* Trang chủ */
+// Đã chuyển trang chủ sang `Page/Home.js`
+
+/*
+========================================
+ CODE CŨ (tham chiếu khi tích hợp backend):
+ - Trước đây Trang chủ được render trực tiếp trong App thông qua HomeMain
+ - Route cũ:
+
+   import HomeSearch from "../components/HomeSearch";
+   import HomeBanner from "../components/HomeBanner";
+   import HomeFilters from "../components/HomeFilters";
+   import HomeJobs from "../components/HomeJobs";
+   import { JobNews } from "../components/JobNews";
+   import FeaturedIndustries from '../components/FeaturedIndustries';
+   import db from '../data/db.json';
+
+   <Route path="/" element={<HomeMain jobs={db.jobs} />} />
+
+ - Hàm HomeMain cũ:
+
 function HomeMain({ jobs }) {
   const [keyword, setKeyword] = useState("");
   const [cityFilter, setCityFilter] = useState("All");
@@ -83,3 +98,5 @@ function HomeMain({ jobs }) {
     </>
   );
 }
+========================================
+*/

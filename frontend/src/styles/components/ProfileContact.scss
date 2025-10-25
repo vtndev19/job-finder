@@ -1,0 +1,356 @@
+/* ProfileContact.scss - Profile Contact Component Styles */
+.profile-contact {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.contact-header {
+    padding: 1.5rem 2rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+    
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+    }
+}
+
+.contact-content {
+    padding: 2rem;
+}
+
+.contact-edit-form {
+    .form-group {
+        margin-bottom: 1.5rem;
+        
+        label {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .input-with-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            
+            .contact-input {
+                flex: 1;
+                border: 2px solid #007bff;
+                border-radius: 0.25rem;
+                padding: 0.75rem;
+                font-size: 1rem;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #0056b3;
+                }
+            }
+            
+            .verification-status {
+                padding: 0.25rem 0.75rem;
+                border-radius: 1rem;
+                font-size: 0.75rem;
+                font-weight: 500;
+                white-space: nowrap;
+                
+                &.verified {
+                    background-color: #d4edda;
+                    color: #155724;
+                }
+                
+                &.unverified {
+                    background-color: #fff3cd;
+                    color: #856404;
+                }
+            }
+        }
+        
+        .contact-input {
+            width: 100%;
+            border: 2px solid #007bff;
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+            font-size: 1rem;
+            
+            &:focus {
+                outline: none;
+                border-color: #0056b3;
+            }
+        }
+    }
+    
+    .btn {
+        padding: 0.75rem 1.5rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
+
+.contact-display {
+    .contact-info {
+        margin-bottom: 2rem;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background-color: #f8f9fa;
+        border-radius: 0.375rem;
+        
+        .contact-label {
+            font-weight: 500;
+            color: #333;
+            min-width: 120px;
+        }
+        
+        .contact-value {
+            flex: 1;
+            color: #666;
+            
+            .phone-number,
+            .email-address {
+                font-weight: 500;
+                color: #333;
+            }
+            
+            .hidden-info {
+                color: #999;
+                font-style: italic;
+            }
+        }
+        
+        .contact-link {
+            color: #007bff;
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        
+        .verification-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            
+            &.verified {
+                background-color: #d4edda;
+                color: #155724;
+            }
+            
+            &.unverified {
+                background-color: #fff3cd;
+                color: #856404;
+            }
+        }
+    }
+    
+    .contact-actions {
+        text-align: center;
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+}
+
+/* Contact Modal */
+.contact-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.contact-modal {
+    background: white;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem 1rem;
+    border-bottom: 1px solid #e9ecef;
+    
+    h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+    }
+    
+    .close-btn {
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        
+        &:hover {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+    }
+}
+
+.modal-content {
+    padding: 2rem;
+}
+
+.verification-warning,
+.contact-success {
+    text-align: center;
+    
+    .warning-icon,
+    .success-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+    
+    .warning-icon {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    
+    .success-icon {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 1rem 0;
+    }
+    
+    p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0 0 1rem 0;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    .btn {
+        padding: 0.75rem 1.5rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-top: 1rem;
+        
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-header {
+        padding: 1rem;
+    }
+    
+    .contact-content {
+        padding: 1rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        
+        .contact-label {
+            min-width: auto;
+        }
+    }
+    
+    .contact-modal {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        padding: 1rem;
+    }
+    
+    .verification-warning,
+    .contact-success {
+        .warning-icon,
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 1.5rem;
+        }
+        
+        h4 {
+            font-size: 1.125rem;
+        }
+    }
+}

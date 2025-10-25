@@ -1,8 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import defaultUser from "../data/user";
 import '../styles/Login.scss';
 
 export default function Login() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!email || !password) return;
+        // Nếu đã có user từ lần đăng ký trước, ưu tiên dùng lại
+        let user = null;
+        try {
+            const raw = localStorage.getItem('user');
+            user = raw ? JSON.parse(raw) : null;
+        } catch {
+            user = null;
+        }
+        if (!user) {
+            // Demo: tạo user tạm với email nhập vào
+            user = {
+                ...defaultUser,
+                email: email.trim() || defaultUser.email,
+            };
+        }
+        try {
+            localStorage.setItem('user', JSON.stringify(user));
+            // Phát sự kiện để Header cập nhật ngay trong cùng tab
+            window.dispatchEvent(new Event('user-changed'));
+        } catch {}
+        navigate("/");
+    };
     return (
         <div className="login-page">
             <div className="login-container">
@@ -10,14 +40,14 @@ export default function Login() {
                     <h2>Đăng nhập</h2>
                     <p>Chào mừng bạn đã quay trở lại!</p>
                 </div>
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input id="email" type="email" placeholder="Nhập email của bạn" />
+                        <input id="email" type="email" placeholder="Nhập email của bạn" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Mật khẩu</label>
-                        <input id="password" type="password" placeholder="Nhập mật khẩu" />
+                        <input id="password" type="password" placeholder="Nhập mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="remember-forgot">
                         <div className="remember-me">

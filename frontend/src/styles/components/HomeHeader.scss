@@ -270,3 +270,68 @@
     }
   }
 }
+.user-menu {
+  position: relative;
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 260px;
+    padding: 10px;
+    z-index: 100;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .user-name { font-weight: bold; }
+      .user-id, .user-email { font-size: 12px; color: #666; }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 8px 0;
+
+        a, button {
+          color: #333;
+          text-decoration: none;
+          width: 100%;
+          display: block;
+          text-align: left;
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          &:hover {
+            color: #007bff;
+          }
+        }
+      }
+    }
+  }
+}
