@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/components/ProfilePortfolio.scss';
 
-export default function ProfilePortfolio({ user, isEditing }) {
+export default function ProfilePortfolio({ user, isEditing, onSave, onEdit, onCancel }) {
     const [portfolio, setPortfolio] = useState(user?.portfolio || [
         {
             id: 1,
@@ -22,6 +22,12 @@ export default function ProfilePortfolio({ user, isEditing }) {
             date: '2024-11-20'
         }
     ]);
+
+    useEffect(() => {
+        if (user?.portfolio) {
+            setPortfolio(user.portfolio);
+        }
+    }, [user, isEditing]);
 
     const [newProject, setNewProject] = useState({
         title: '',
@@ -56,15 +62,45 @@ export default function ProfilePortfolio({ user, isEditing }) {
     };
 
     const handleProjectChange = (projectId, field, value) => {
-        setPortfolio(prev => prev.map(project => 
-            project.id === projectId ? { ...project, [field]: value } : project
-        ));
+        setPortfolio(prev => prev.map(project => {
+            if (project.id === projectId) {
+                if (field === 'technologies') {
+                    return {
+                        ...project,
+                        technologies: typeof value === 'string'
+                            ? value.split(',').map(tech => tech.trim()).filter(tech => tech)
+                            : value
+                    };
+                }
+                return { ...project, [field]: value };
+            }
+            return project;
+        }));
+    };
+
+    const handleSavePortfolio = () => {
+        const success = onSave?.({ portfolio });
+        if (success) {
+            onCancel?.();
+        }
+    };
+
+    const handleCancelEdit = () => {
+        if (user?.portfolio) {
+            setPortfolio(user.portfolio);
+        }
+        onCancel?.();
     };
 
     return (
-        <div className="profile-portfolio">
+        <div className={`profile-portfolio ${isEditing ? 'is-editing' : ''}`} id="portfolio">
             <div className="portfolio-header">
                 <h2>Dự án đã thực hiện</h2>
+                {!isEditing && onEdit && (
+                    <button className="section-edit-btn" type="button" onClick={onEdit}>
+                        <i className="fas fa-pen"></i> Chỉnh sửa
+                    </button>
+                )}
                 {isEditing && (
                     <span className="status-text">Freelancer đang cập nhật portfolio</span>
                 )}
@@ -90,6 +126,7 @@ export default function ProfilePortfolio({ user, isEditing }) {
                                     {isEditing && (
                                         <button 
                                             className="remove-project-btn"
+                                            type="button"
                                             onClick={() => handleRemoveProject(project.id)}
                                         >
                                             <i className="fas fa-times"></i>
@@ -114,7 +151,7 @@ export default function ProfilePortfolio({ user, isEditing }) {
                                             />
                                             <input
                                                 type="text"
-                                                value={project.technologies.join(', ')}
+                                                value={Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies}
                                                 onChange={(e) => handleProjectChange(project.id, 'technologies', e.target.value)}
                                                 className="project-tech-input"
                                                 placeholder="Công nghệ sử dụng (cách nhau bởi dấu phẩy)"
@@ -142,14 +179,14 @@ export default function ProfilePortfolio({ user, isEditing }) {
                                             <h3 className="project-title">{project.title}</h3>
                                             <p className="project-description">{project.description}</p>
                                             <div className="project-technologies">
-                                                {project.technologies.map((tech, index) => (
+                                                {(project.technologies || []).map((tech, index) => (
                                                     <span key={index} className="tech-tag">
                                                         {tech}
                                                     </span>
                                                 ))}
                                             </div>
                                             <div className="project-meta">
-                                                <span className={`status-badge ${project.status.toLowerCase().replace(' ', '-')}`}>
+                                                <span className={`status-badge ${project.status?.toLowerCase().replace(/\s+/g, '-')}`}>
                                                     {project.status}
                                                 </span>
                                                 <span className="project-date">
@@ -165,61 +202,71 @@ export default function ProfilePortfolio({ user, isEditing }) {
                 )}
 
                 {isEditing && (
-                    <div className="add-project-section">
-                        <h3>Thêm dự án mới</h3>
-                        <div className="add-project-form">
-                            <div className="form-row">
-                                <input
-                                    type="text"
-                                    placeholder="Tên dự án"
-                                    value={newProject.title}
-                                    onChange={(e) => setNewProject(prev => ({ ...prev, title: e.target.value }))}
-                                    className="project-input"
+                    <>
+                        <div className="add-project-section">
+                            <h3>Thêm dự án mới</h3>
+                            <div className="add-project-form">
+                                <div className="form-row">
+                                    <input
+                                        type="text"
+                                        placeholder="Tên dự án"
+                                        value={newProject.title}
+                                        onChange={(e) => setNewProject(prev => ({ ...prev, title: e.target.value }))}
+                                        className="project-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="URL hình ảnh"
+                                        value={newProject.image}
+                                        onChange={(e) => setNewProject(prev => ({ ...prev, image: e.target.value }))}
+                                        className="project-input"
+                                    />
+                                </div>
+                                <textarea
+                                    placeholder="Mô tả dự án"
+                                    value={newProject.description}
+                                    onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
+                                    className="project-textarea"
+                                    rows="3"
                                 />
-                                <input
-                                    type="text"
-                                    placeholder="URL hình ảnh"
-                                    value={newProject.image}
-                                    onChange={(e) => setNewProject(prev => ({ ...prev, image: e.target.value }))}
-                                    className="project-input"
-                                />
+                                <div className="form-row">
+                                    <input
+                                        type="text"
+                                        placeholder="Công nghệ sử dụng (cách nhau bởi dấu phẩy)"
+                                        value={newProject.technologies}
+                                        onChange={(e) => setNewProject(prev => ({ ...prev, technologies: e.target.value }))}
+                                        className="project-input"
+                                    />
+                                    <select
+                                        value={newProject.status}
+                                        onChange={(e) => setNewProject(prev => ({ ...prev, status: e.target.value }))}
+                                        className="status-select"
+                                    >
+                                        <option value="Hoàn thành">Hoàn thành</option>
+                                        <option value="Đang thực hiện">Đang thực hiện</option>
+                                        <option value="Tạm dừng">Tạm dừng</option>
+                                    </select>
+                                    <input
+                                        type="date"
+                                        value={newProject.date}
+                                        onChange={(e) => setNewProject(prev => ({ ...prev, date: e.target.value }))}
+                                        className="date-input"
+                                    />
+                                </div>
+                                <button className="btn btn-primary" type="button" onClick={handleAddProject}>
+                                    Thêm dự án
+                                </button>
                             </div>
-                            <textarea
-                                placeholder="Mô tả dự án"
-                                value={newProject.description}
-                                onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
-                                className="project-textarea"
-                                rows="3"
-                            />
-                            <div className="form-row">
-                                <input
-                                    type="text"
-                                    placeholder="Công nghệ sử dụng (cách nhau bởi dấu phẩy)"
-                                    value={newProject.technologies}
-                                    onChange={(e) => setNewProject(prev => ({ ...prev, technologies: e.target.value }))}
-                                    className="project-input"
-                                />
-                                <select
-                                    value={newProject.status}
-                                    onChange={(e) => setNewProject(prev => ({ ...prev, status: e.target.value }))}
-                                    className="status-select"
-                                >
-                                    <option value="Hoàn thành">Hoàn thành</option>
-                                    <option value="Đang thực hiện">Đang thực hiện</option>
-                                    <option value="Tạm dừng">Tạm dừng</option>
-                                </select>
-                                <input
-                                    type="date"
-                                    value={newProject.date}
-                                    onChange={(e) => setNewProject(prev => ({ ...prev, date: e.target.value }))}
-                                    className="date-input"
-                                />
-                            </div>
-                            <button className="btn btn-primary" onClick={handleAddProject}>
-                                Thêm dự án
+                        </div>
+                        <div className="portfolio-save-section">
+                            <button className="btn btn-primary" type="button" onClick={handleSavePortfolio}>
+                                Lưu portfolio
+                            </button>
+                            <button className="btn btn-secondary" type="button" onClick={handleCancelEdit}>
+                                Hủy
                             </button>
                         </div>
-                    </div>
+                    </>
                 )}
             </div>
         </div>

@@ -31,6 +31,7 @@ export default function Footer() {
                         <ul>
                             <li><Link to="/jobs">Tìm việc làm</Link></li>
                             <li><Link to="/profile">Tạo hồ sơ</Link></li>
+                            <li><Link to="/blog">Blog - Kiến thức nghề nghiệp</Link></li>
                             <li><Link to="/career-advice">Tư vấn nghề nghiệp</Link></li>
                             <li><Link to="/salary-guide">Bảng lương</Link></li>
                         </ul>

@@ -6,97 +6,130 @@ import HomeHeader from "../components/HomeHeader";
 import Home from "../Page/Home";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat";
+import AdminLayout from "../components/AdminLayout";
 /* Views */
 import Login from "../Page/Login";
 import Register from "../Page/Register";
 import JobDetail from "../Page/JobDetail";
 import AllJobs from '../Page/AllJobs';
 import Profile from '../Page/Profile';
+import Blog from '../Page/Blog';
+import CVInteriorDesign from '../Page/CVInteriorDesign';
+/* Admin Pages */
+import AdminDashboard from '../Page/AdminDashboard';
+import AdminUsers from '../Page/AdminUsers';
+import AdminJobs from '../Page/AdminJobs';
+import AdminApplications from '../Page/AdminApplications';
+import AdminContent from '../Page/AdminContent';
+import AdminAI from '../Page/AdminAI';
+import AdminNotifications from '../Page/AdminNotifications';
+import AdminSupport from '../Page/AdminSupport';
+import AdminModeration from '../Page/AdminModeration';
+import AdminSettings from '../Page/AdminSettings';
+import AdminLogs from '../Page/AdminLogs';
+import AdminSecurity from '../Page/AdminSecurity';
 
 /* Styles */
 import "../styles/global.scss";
 import "../styles/Home.scss";
 
-/* Mock data */
-
 /* App chính */
 export default function App() {
   return (
-    <>
-      <HomeHeader siteName="JobFinder" />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/jobs" element={<AllJobs />} />
-          <Route path="/job/:jobId" element={<JobDetail />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </main>
-      <Chat />
-      <Footer />
-    </>
+    <Routes>
+      {/* Admin Routes */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="users/candidates" element={<AdminUsers />} />
+        <Route path="users/employers" element={<AdminUsers />} />
+        <Route path="users/admins" element={<AdminUsers />} />
+        <Route path="jobs" element={<AdminJobs />} />
+        <Route path="applications" element={<AdminApplications />} />
+        <Route path="content" element={<AdminContent />} />
+        <Route path="ai" element={<AdminAI />} />
+        <Route path="notifications" element={<AdminNotifications />} />
+        <Route path="support" element={<AdminSupport />} />
+        <Route path="moderation" element={<AdminModeration />} />
+        <Route path="settings" element={<AdminSettings />} />
+        <Route path="logs" element={<AdminLogs />} />
+        <Route path="security" element={<AdminSecurity />} />
+      </Route>
+
+      {/* Public Routes */}
+      <Route path="/" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <Home />
+          </main>
+          <Chat />
+          <Footer />
+        </>
+      } />
+      <Route path="/login" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <Login />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/register" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <Register />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/jobs" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <AllJobs />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/job/:jobId" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <JobDetail />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/profile" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <Profile />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/blog" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <Blog />
+          </main>
+          <Footer />
+        </>
+      } />
+      <Route path="/blog/cv-thiet-ke-noi-that" element={
+        <>
+          <HomeHeader siteName="JobFinder" />
+          <main>
+            <CVInteriorDesign />
+          </main>
+          <Footer />
+        </>
+      } />
+    </Routes>
   );
 }
-
-// Đã chuyển trang chủ sang `Page/Home.js`
-
-/*
-========================================
- CODE CŨ (tham chiếu khi tích hợp backend):
- - Trước đây Trang chủ được render trực tiếp trong App thông qua HomeMain
- - Route cũ:
-
-   import HomeSearch from "../components/HomeSearch";
-   import HomeBanner from "../components/HomeBanner";
-   import HomeFilters from "../components/HomeFilters";
-   import HomeJobs from "../components/HomeJobs";
-   import { JobNews } from "../components/JobNews";
-   import FeaturedIndustries from '../components/FeaturedIndustries';
-   import db from '../data/db.json';
-
-   <Route path="/" element={<HomeMain jobs={db.jobs} />} />
-
- - Hàm HomeMain cũ:
-
-function HomeMain({ jobs }) {
-  const [keyword, setKeyword] = useState("");
-  const [cityFilter, setCityFilter] = useState("All");
-  const [industryFilter, setIndustryFilter] = useState("All");
-
-  const cities = Array.from(new Set(jobs.map((j) => j.location)));
-  const industries = Array.from(new Set(db.industries.map((i) => i.name)));
-
-  const filtered = jobs.filter((j) => {
-    const matchKeyword = keyword.trim() === "" || j.title.toLowerCase().includes(keyword.toLowerCase());
-    const matchCity = cityFilter === "All" || j.location === cityFilter;
-    const matchIndustry = industryFilter === "All" || db.industries.find(i => i.id === j.industry_id)?.name === industryFilter;
-    return matchKeyword && matchCity && matchIndustry;
-  });
-
-  return (
-    <>
-      <HomeBanner />
-      <div className="container">
-        <section className="home">
-          <HomeSearch keyword={keyword} setKeyword={setKeyword} />
-          <HomeFilters
-            cities={cities}
-            industries={industries}
-            cityFilter={cityFilter}
-            setCityFilter={setCityFilter}
-            industryFilter={industryFilter}
-            setIndustryFilter={setIndustryFilter}
-          />
-          <HomeJobs jobs={filtered.slice(0, 10)} />
-          <JobNews articles={db.articles} isLoading={false} />
-          <FeaturedIndustries jobs={jobs} />
-
-        </section>
-      </div>
-    </>
-  );
-}
-========================================
-*/

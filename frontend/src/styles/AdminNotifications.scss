@@ -1,0 +1,60 @@
+@import 'AdminContent.scss';
+
+.admin-notifications {
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+
+        @include tablet {
+            grid-template-columns: 1fr;
+        }
+
+        .notification-form,
+        .notification-history {
+            background: $white;
+            padding: 2rem;
+            border-radius: $radius-lg;
+            box-shadow: $shadow-md;
+
+            h2 {
+                margin: 0 0 1.5rem 0;
+                font-size: $font-size-xl;
+                font-weight: $font-bold;
+            }
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: $font-medium;
+        color: $text-dark;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        border: 1px solid $gray-300;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+            width: auto;
+        }
+    }
+}

@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/components/ProfileSkills.scss';
 
-export default function ProfileSkills({ user, isEditing }) {
+export default function ProfileSkills({ user, isEditing, onSave, onEdit, onCancel }) {
     const [skills, setSkills] = useState(user?.skills || [
         { id: 1, name: 'Xử lý dữ liệu', category: 'Data Processing' },
         { id: 2, name: 'Lập trình web', category: 'Web Development' },
         { id: 3, name: 'Thiết kế UI/UX', category: 'Design' }
     ]);
+
+    useEffect(() => {
+        if (user?.skills) {
+            setSkills(user.skills);
+        }
+    }, [user, isEditing]);
 
     const [newSkill, setNewSkill] = useState({ name: '', category: '' });
 
@@ -32,10 +38,29 @@ export default function ProfileSkills({ user, isEditing }) {
         ));
     };
 
+    const handleSaveSkills = () => {
+        const success = onSave?.({ skills });
+        if (success) {
+            onCancel?.();
+        }
+    };
+
+    const handleCancelEdit = () => {
+        if (user?.skills) {
+            setSkills(user.skills);
+        }
+        onCancel?.();
+    };
+
     return (
-        <div className="profile-skills">
+        <div className={`profile-skills ${isEditing ? 'is-editing' : ''}`} id="skills">
             <div className="skills-header">
                 <h2>Hồ sơ năng lực</h2>
+                {!isEditing && onEdit && (
+                    <button className="section-edit-btn" type="button" onClick={onEdit}>
+                        <i className="fas fa-pen"></i> Chỉnh sửa
+                    </button>
+                )}
                 {isEditing && (
                     <span className="status-text">Freelancer đang cập nhật kỹ năng</span>
                 )}
@@ -67,6 +92,7 @@ export default function ProfileSkills({ user, isEditing }) {
                                         />
                                         <button 
                                             className="remove-skill-btn"
+                                            type="button"
                                             onClick={() => handleRemoveSkill(skill.id)}
                                         >
                                             <i className="fas fa-times"></i>
@@ -84,28 +110,38 @@ export default function ProfileSkills({ user, isEditing }) {
                 )}
 
                 {isEditing && (
-                    <div className="add-skill-section">
-                        <h3>Thêm kỹ năng mới</h3>
-                        <div className="add-skill-form">
-                            <input
-                                type="text"
-                                placeholder="Tên kỹ năng"
-                                value={newSkill.name}
-                                onChange={(e) => setNewSkill(prev => ({ ...prev, name: e.target.value }))}
-                                className="skill-input"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Danh mục"
-                                value={newSkill.category}
-                                onChange={(e) => setNewSkill(prev => ({ ...prev, category: e.target.value }))}
-                                className="skill-category-input"
-                            />
-                            <button className="btn btn-primary" onClick={handleAddSkill}>
-                                Thêm kỹ năng
+                    <>
+                        <div className="add-skill-section">
+                            <h3>Thêm kỹ năng mới</h3>
+                            <div className="add-skill-form">
+                                <input
+                                    type="text"
+                                    placeholder="Tên kỹ năng"
+                                    value={newSkill.name}
+                                    onChange={(e) => setNewSkill(prev => ({ ...prev, name: e.target.value }))}
+                                    className="skill-input"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Danh mục"
+                                    value={newSkill.category}
+                                    onChange={(e) => setNewSkill(prev => ({ ...prev, category: e.target.value }))}
+                                    className="skill-category-input"
+                                />
+                                <button className="btn btn-primary" type="button" onClick={handleAddSkill}>
+                                    Thêm kỹ năng
+                                </button>
+                            </div>
+                        </div>
+                        <div className="skills-save-section">
+                            <button className="btn btn-primary" type="button" onClick={handleSaveSkills}>
+                                Lưu kỹ năng
+                            </button>
+                            <button className="btn btn-secondary" type="button" onClick={handleCancelEdit}>
+                                Hủy
                             </button>
                         </div>
-                    </div>
+                    </>
                 )}
             </div>
 

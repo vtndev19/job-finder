@@ -1,0 +1,45 @@
+@import '../global.scss';
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background: $background;
+    position: relative;
+
+    &__main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-left: 280px;
+        transition: margin-left 0.3s ease;
+
+        @include tablet {
+            margin-left: 0;
+        }
+    }
+
+    &__content {
+        flex: 1;
+        padding: 2rem;
+        overflow-y: auto;
+
+        @include mobile {
+            padding: 1rem;
+        }
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+        
+        @include tablet {
+            display: block;
+        }
+    }
+}

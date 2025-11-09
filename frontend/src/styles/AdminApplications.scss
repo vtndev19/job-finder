@@ -1,0 +1,86 @@
+@import 'global.scss';
+
+.admin-applications {
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .stat-card {
+            background: $white;
+            padding: 1.5rem;
+            border-radius: $radius-lg;
+            box-shadow: $shadow-md;
+            text-align: center;
+
+            h3 {
+                margin: 0 0 0.5rem 0;
+                font-size: $font-size-sm;
+                color: $text-light;
+                font-weight: $font-medium;
+            }
+
+            .stat-value {
+                margin: 0;
+                font-size: $font-size-2xl;
+                font-weight: $font-bold;
+                color: $text-dark;
+            }
+        }
+    }
+
+    &__filters {
+        margin-bottom: 1.5rem;
+    }
+
+    &__table {
+        background: $white;
+        border-radius: $radius-lg;
+        box-shadow: $shadow-md;
+        overflow: hidden;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            thead {
+                background: $gray-50;
+
+                th {
+                    padding: 1rem;
+                    text-align: left;
+                    font-weight: $font-semibold;
+                    color: $text-dark;
+                    font-size: $font-size-sm;
+                    border-bottom: 2px solid $gray-200;
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid $gray-100;
+
+                    &:hover {
+                        background: $gray-50;
+                    }
+
+                    td {
+                        padding: 1rem;
+                        font-size: $font-size-sm;
+                        color: $text;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.badge-info {
+    background: rgba($secondary, 0.1);
+    color: $secondary;
+    padding: 0.25rem 0.75rem;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-medium;
+}

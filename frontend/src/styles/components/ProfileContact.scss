@@ -5,17 +5,51 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     overflow: hidden;
+    border: 1px solid #e2e8f0;
+
+    &.is-editing {
+        box-shadow: none;
+        border: 2px solid rgba(37, 99, 235, 0.2);
+    }
 }
 
 .contact-header {
     padding: 1.5rem 2rem 1rem;
     border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
     
     h2 {
         font-size: 1.5rem;
         font-weight: 600;
         color: #333;
         margin: 0;
+    }
+
+    .section-edit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(37, 99, 235, 0.1);
+        color: #2563eb;
+        border: none;
+        border-radius: 999px;
+        padding: 0.3rem 0.9rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        i {
+            font-size: 0.85em;
+        }
+
+        &:hover {
+            background: rgba(37, 99, 235, 0.2);
+        }
     }
 }
 

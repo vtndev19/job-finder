@@ -1,0 +1,90 @@
+@import 'global.scss';
+
+.admin-content {
+    &__tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        border-bottom: 2px solid $gray-200;
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: $text-light;
+            cursor: pointer;
+            transition: $transition-base;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: $font-medium;
+
+            &:hover {
+                color: $primary;
+                background: $gray-50;
+            }
+
+            &.active {
+                color: $primary;
+                border-bottom-color: $primary;
+            }
+        }
+    }
+
+    &__content {
+        .content-section {
+            background: $white;
+            padding: 2rem;
+            border-radius: $radius-lg;
+            box-shadow: $shadow-md;
+
+            h2 {
+                margin: 0 0 0.5rem 0;
+                font-size: $font-size-xl;
+                font-weight: $font-bold;
+                color: $text-dark;
+            }
+
+            p {
+                margin: 0 0 1.5rem 0;
+                color: $text-light;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+
+                thead {
+                    background: $gray-50;
+
+                    th {
+                        padding: 1rem;
+                        text-align: left;
+                        font-weight: $font-semibold;
+                        color: $text-dark;
+                        font-size: $font-size-sm;
+                        border-bottom: 2px solid $gray-200;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        border-bottom: 1px solid $gray-100;
+
+                        &:hover {
+                            background: $gray-50;
+                        }
+
+                        td {
+                            padding: 1rem;
+                            font-size: $font-size-sm;
+                            color: $text;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

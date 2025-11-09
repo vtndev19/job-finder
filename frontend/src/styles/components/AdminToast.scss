@@ -1,0 +1,95 @@
+@import '../global.scss';
+
+.admin-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: $white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 300px;
+    max-width: 400px;
+    z-index: 10001;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid;
+
+    &--success {
+        border-left-color: $success;
+        
+        .admin-toast__icon {
+            color: $success;
+        }
+    }
+
+    &--error {
+        border-left-color: $error;
+        
+        .admin-toast__icon {
+            color: $error;
+        }
+    }
+
+    &--warning {
+        border-left-color: $warning;
+        
+        .admin-toast__icon {
+            color: $warning;
+        }
+    }
+
+    &--info {
+        border-left-color: $primary;
+        
+        .admin-toast__icon {
+            color: $primary;
+        }
+    }
+
+    &--show {
+        animation: slideInRight 0.3s ease;
+    }
+
+    &__icon {
+        font-size: $font-size-xl;
+        flex-shrink: 0;
+    }
+
+    &__message {
+        flex: 1;
+        font-size: $font-size-sm;
+        color: $text-dark;
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        color: $text-light;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: $radius-sm;
+        transition: $transition-base;
+        flex-shrink: 0;
+
+        &:hover {
+            color: $text-dark;
+            background: $gray-100;
+        }
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+

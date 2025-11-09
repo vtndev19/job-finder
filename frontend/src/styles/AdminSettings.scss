@@ -1,0 +1,94 @@
+@import 'AdminContent.scss';
+
+.admin-settings {
+    &__content {
+        .settings-section {
+            background: $white;
+            padding: 2rem;
+            border-radius: $radius-lg;
+            box-shadow: $shadow-md;
+
+            h2 {
+                margin: 0 0 1.5rem 0;
+                font-size: $font-size-xl;
+                font-weight: $font-bold;
+                color: $text-dark;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+
+                label {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    font-weight: $font-medium;
+                    color: $text-dark;
+                    font-size: $font-size-sm;
+
+                    input[type="checkbox"] {
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                input[type="text"],
+                input[type="number"],
+                input[type="password"],
+                select,
+                textarea {
+                    width: 100%;
+                    padding: 0.6rem 1rem;
+                    border: 1px solid $gray-300;
+                    border-radius: $radius-md;
+                    font-size: $font-size-sm;
+                    transition: $transition-base;
+
+                    &:focus {
+                        outline: none;
+                        border-color: $primary;
+                        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+                    }
+                }
+
+                textarea {
+                    resize: vertical;
+                    min-height: 100px;
+                }
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1rem;
+
+                thead {
+                    background: $gray-50;
+
+                    th {
+                        padding: 1rem;
+                        text-align: left;
+                        font-weight: $font-semibold;
+                        color: $text-dark;
+                        font-size: $font-size-sm;
+                        border-bottom: 2px solid $gray-200;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        border-bottom: 1px solid $gray-100;
+
+                        &:hover {
+                            background: $gray-50;
+                        }
+
+                        td {
+                            padding: 1rem;
+                            font-size: $font-size-sm;
+                            color: $text;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

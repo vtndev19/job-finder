@@ -1,0 +1,233 @@
+@import 'global.scss';
+
+.admin-dashboard {
+    &__header {
+        margin-bottom: 2rem;
+
+        h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: $font-size-3xl;
+            font-weight: $font-bold;
+            color: $text-dark;
+        }
+
+        p {
+            margin: 0;
+            color: $text-light;
+            font-size: $font-size-lg;
+        }
+    }
+
+    &__stats {
+        margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: $white;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+        box-shadow: $shadow-md;
+        display: flex;
+        gap: 1rem;
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $shadow-lg;
+            transform: translateY(-2px);
+        }
+
+        &__icon {
+            width: 60px;
+            height: 60px;
+            border-radius: $radius-md;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $font-size-2xl;
+        }
+
+        &__content {
+            flex: 1;
+
+            &-title {
+                margin: 0 0 0.5rem 0;
+                font-size: $font-size-sm;
+                color: $text-light;
+                font-weight: $font-medium;
+            }
+
+            &-value {
+                margin: 0 0 0.25rem 0;
+                font-size: $font-size-2xl;
+                font-weight: $font-bold;
+                color: $text-dark;
+            }
+
+            &-subtitle {
+                margin: 0 0 0.5rem 0;
+                font-size: $font-size-xs;
+                color: $text-light;
+            }
+
+            &-change {
+                margin: 0;
+                font-size: $font-size-xs;
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+
+                &.positive {
+                    color: $success;
+                }
+
+                &.negative {
+                    color: $error;
+                }
+
+                i {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+
+    &__charts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+
+        @include mobile {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .chart-card {
+        background: $white;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+        box-shadow: $shadow-md;
+
+        h3 {
+            margin: 0 0 1rem 0;
+            font-size: $font-size-lg;
+            font-weight: $font-semibold;
+            color: $text-dark;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $gray-50;
+            border-radius: $radius-md;
+            color: $text-light;
+        }
+    }
+
+    &__tables {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 1.5rem;
+
+        @include mobile {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .table-card {
+        background: $white;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+        box-shadow: $shadow-md;
+
+        h3 {
+            margin: 0 0 1rem 0;
+            font-size: $font-size-lg;
+            font-weight: $font-semibold;
+            color: $text-dark;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            thead {
+                tr {
+                    border-bottom: 2px solid $gray-200;
+
+                    th {
+                        padding: 0.75rem;
+                        text-align: left;
+                        font-weight: $font-semibold;
+                        color: $text-dark;
+                        font-size: $font-size-sm;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid $gray-100;
+                    transition: $transition-base;
+
+                    &:hover {
+                        background: $gray-50;
+                    }
+
+                    td {
+                        padding: 0.75rem;
+                        font-size: $font-size-sm;
+                        color: $text;
+
+                        .badge {
+                            padding: 0.25rem 0.5rem;
+                            border-radius: $radius-sm;
+                            font-size: $font-size-xs;
+                            font-weight: $font-medium;
+
+                            &.badge-success {
+                                background: rgba($success, 0.1);
+                                color: $success;
+                            }
+
+                            &.badge-warning {
+                                background: rgba($warning, 0.1);
+                                color: $warning;
+                            }
+
+                            &.badge-danger {
+                                background: rgba($error, 0.1);
+                                color: $error;
+                            }
+                        }
+
+                        .btn-icon {
+                            background: none;
+                            border: none;
+                            color: $text-light;
+                            cursor: pointer;
+                            padding: 0.25rem 0.5rem;
+                            margin: 0 0.25rem;
+                            border-radius: $radius-sm;
+                            transition: $transition-base;
+
+                            &:hover {
+                                color: $primary;
+                                background: $gray-100;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

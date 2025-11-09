@@ -1,0 +1,228 @@
+@import '../variables';
+
+.profile-cv {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .cv-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 1.5rem;
+            color: $primary-color;
+            margin: 0;
+        }
+    }
+
+    .cv-upload {
+        position: relative;
+
+        .upload-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            
+            i {
+                font-size: 1.1rem;
+            }
+            
+            &:hover {
+                background-color: darken($primary-color, 5%);
+            }
+        }
+
+        .upload-progress {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 0.5rem;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 4px;
+
+            .progress-bar {
+                height: 100%;
+                background-color: $primary-color;
+                transition: width 0.3s ease;
+            }
+
+            span {
+                position: absolute;
+                right: 0;
+                top: 6px;
+                font-size: 0.8rem;
+                color: $text-secondary;
+            }
+        }
+    }
+
+    .cv-list {
+        .no-cv {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: $text-secondary;
+
+            i {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            span {
+                font-size: 0.9rem;
+            }
+        }
+
+        .cv-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+
+            &:hover {
+                border-color: $primary-color;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            &.default {
+                background-color: rgba($primary-color, 0.05);
+                border-color: $primary-color;
+            }
+
+            .cv-icon {
+                font-size: 2rem;
+                color: #e74c3c;
+                margin-right: 1rem;
+                
+                i.fa-file-word {
+                    color: #2b579a;
+                }
+            }
+
+            .cv-info {
+                flex: 1;
+
+                h3 {
+                    font-size: 1.1rem;
+                    margin: 0 0 0.25rem;
+                    color: $text-color;
+                }
+
+                .cv-meta {
+                    font-size: 0.9rem;
+                    color: $text-secondary;
+                    margin: 0;
+                }
+            }
+
+            .cv-actions {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                button {
+                    background: none;
+                    border: none;
+                    padding: 0.5rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    border-radius: 4px;
+                    transition: all 0.2s ease;
+
+                    &.btn-set-default {
+                        color: $primary-color;
+                        font-size: 0.9rem;
+                        padding: 0.5rem 1rem;
+                        border: 1px solid $primary-color;
+                        
+                        &:hover {
+                            background-color: $primary-color;
+                            color: white;
+                        }
+                    }
+
+                    &.btn-preview {
+                        color: $text-secondary;
+                        
+                        &:hover {
+                            color: $text-color;
+                            background-color: rgba(0, 0, 0, 0.05);
+                        }
+                    }
+
+                    &.btn-download {
+                        color: $primary-color;
+                        
+                        &:hover {
+                            background-color: rgba($primary-color, 0.1);
+                        }
+                    }
+
+                    &.btn-delete {
+                        color: $danger-color;
+                        
+                        &:hover {
+                            background-color: rgba($danger-color, 0.1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cv-tips {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+
+        h3 {
+            font-size: 1.1rem;
+            color: $text-color;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                color: $text-secondary;
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+                padding-left: 1.5rem;
+                position: relative;
+
+                &:before {
+                    content: "•";
+                    position: absolute;
+                    left: 0;
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,324 @@
+@import '../global.scss';
+
+.profile-section-card {
+  background: $white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  margin-bottom: $spacing-2xl;
+  overflow: hidden;
+  border: 1px solid $gray-200;
+
+  &.is-editing {
+    box-shadow: none;
+    border: 2px solid rgba($primary, 0.2);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+    padding: $spacing-xl $spacing-2xl $spacing-lg;
+    background: linear-gradient(180deg, rgba($primary, 0.05), rgba($white, 0));
+
+    h2 {
+      margin: 0 0 $spacing-xs 0;
+      font-size: $font-size-2xl;
+      font-weight: $font-semibold;
+      color: $text-dark;
+    }
+
+    .section-description {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $text-light;
+    }
+
+    .section-count {
+      font-size: $font-size-sm;
+      font-weight: $font-medium;
+      padding: $spacing-xs $spacing-md;
+      border-radius: $radius-full;
+
+      &.filled {
+        background: rgba($primary, 0.1);
+        color: $primary-dark;
+      }
+
+      &.empty {
+        background: rgba($warning, 0.1);
+        color: $warning;
+      }
+    }
+
+    .section-edit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      background: rgba($primary, 0.1);
+      color: $primary-dark;
+      border: none;
+      border-radius: $radius-full;
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+      font-weight: $font-medium;
+      cursor: pointer;
+      transition: $transition-base;
+
+      i {
+        font-size: 0.8em;
+      }
+
+      &:hover {
+        background: rgba($primary, 0.2);
+      }
+    }
+  }
+
+  .section-body {
+    padding: 0 $spacing-2xl $spacing-2xl;
+  }
+
+  .section-empty,
+  .section-empty-edit {
+    padding: $spacing-xl;
+    text-align: center;
+    background: $gray-50;
+    border-radius: $radius-lg;
+    color: $text-light;
+
+    p {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .section-display {
+    display: grid;
+    gap: $spacing-xl;
+  }
+
+  .section-item {
+    padding: $spacing-xl;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    background: $white;
+    box-shadow: $shadow-sm;
+
+    .item-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+
+      h3 {
+        margin: 0;
+        font-size: $font-size-xl;
+        font-weight: $font-semibold;
+        color: $text-dark;
+      }
+
+      .item-subtitle {
+        font-size: $font-size-sm;
+        color: $text-light;
+      }
+    }
+
+    .item-details {
+      display: grid;
+      gap: $spacing-sm;
+
+      .item-meta {
+        margin: 0;
+        font-size: $font-size-sm;
+        color: $text;
+
+        .label {
+          font-weight: $font-medium;
+          margin-right: $spacing-xs;
+        }
+      }
+
+      .item-paragraph {
+        margin: 0;
+        font-size: $font-size-base;
+        color: $text;
+        line-height: $line-height-relaxed;
+        background: $gray-50;
+        padding: $spacing-md;
+        border-radius: $radius-md;
+      }
+    }
+  }
+
+  .section-editor {
+    display: grid;
+    gap: $spacing-xl;
+  }
+
+  .section-edit-item {
+    position: relative;
+    border: 1px dashed $gray-300;
+    border-radius: $radius-lg;
+    padding: $spacing-xl $spacing-xl $spacing-xl $spacing-2xl;
+    background: $white;
+
+    .item-index {
+      position: absolute;
+      top: $spacing-md;
+      left: $spacing-md;
+      font-size: $font-size-sm;
+      font-weight: $font-semibold;
+      color: $primary;
+    }
+
+    .item-fields {
+      display: grid;
+      gap: $spacing-md;
+    }
+
+    .remove-item-btn {
+      position: absolute;
+      top: $spacing-md;
+      right: $spacing-md;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: rgba($error, 0.1);
+      color: $error;
+      font-size: $font-size-xl;
+      line-height: 1;
+      cursor: pointer;
+      transition: $transition-base;
+
+      &:hover {
+        background: rgba($error, 0.2);
+      }
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+      font-size: $font-size-sm;
+      font-weight: $font-medium;
+      color: $text-dark;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: $spacing-sm;
+      font-size: $font-size-base;
+      border: 1px solid $gray-300;
+      border-radius: $radius-md;
+      background: $white;
+      transition: $transition-base;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.15);
+      }
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+  }
+
+  .section-editor-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+
+    .btn {
+      padding: $spacing-sm $spacing-xl;
+      border-radius: $radius-md;
+      font-size: $font-size-sm;
+      font-weight: $font-semibold;
+      cursor: pointer;
+      transition: $transition-base;
+      border: none;
+
+      &.btn-outline {
+        background: transparent;
+        color: $primary;
+        border: 1px solid $primary;
+
+        &:hover {
+          background: rgba($primary, 0.08);
+        }
+      }
+
+      &.btn-primary {
+        background: $primary;
+        color: $white;
+
+        &:hover {
+          background: $primary-dark;
+        }
+      }
+
+      &.btn-secondary {
+        background: $gray-200;
+        color: $text-dark;
+
+        &:hover {
+          background: $gray-300;
+        }
+      }
+    }
+
+    .action-group {
+      display: flex;
+      gap: $spacing-sm;
+    }
+  }
+}
+
+@media (max-width: $tablet) {
+  .profile-section-card {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .section-edit-item {
+      padding: $spacing-xl;
+
+      .item-index {
+        position: static;
+        margin-bottom: $spacing-sm;
+      }
+
+      .remove-item-btn {
+        top: $spacing-sm;
+        right: $spacing-sm;
+      }
+    }
+
+    .section-editor-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .action-group {
+        width: 100%;
+        flex-direction: column;
+
+        .btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

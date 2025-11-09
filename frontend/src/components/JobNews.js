@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/components/JobNews.scss";
 
@@ -32,46 +33,59 @@ export function JobNews({ articles = [], isLoading = false, onReadMore }) {
         </div>
     );
 
-    const NewsCard = ({ article, index }) => (
-        <motion.article
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="jobnews-card"
-        >
-            <div className="jobnews-card-content">
-                <div className="jobnews-text">
-                    <h3>{article.title}</h3>
-                    <p>{article.excerpt || "Tin tức mới về tuyển dụng"}</p>
+    const NewsCard = ({ article, index }) => {
+        // Map article to blog post link if available
+        const getBlogLink = (articleId) => {
+            const blogMapping = {
+                'cv-thiet-ke-noi-that': '/blog/cv-thiet-ke-noi-that',
+                'cv-xuat-nhap-khau': '/blog/cv-xuat-nhap-khau',
+                'cv-le-tan': '/blog/cv-le-tan'
+            };
+            // Check if article title contains keywords
+            if (article.title?.toLowerCase().includes('cv') || article.title?.toLowerCase().includes('thiết kế')) {
+                return '/blog/cv-thiet-ke-noi-that';
+            }
+            return blogMapping[articleId] || '/blog';
+        };
 
-                    <div className="jobnews-meta">
-                        <span>{article.company}</span>
-                        <span>
-                            {article.location ? `${article.location} · ` : ""}
-                            {formatDate(article.date)}
-                        </span>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onReadMore?.(article);
-                            }}
-                        >
-                            Đọc thêm
-                        </button>
+        const blogLink = article.blogLink || getBlogLink(article.id);
+
+        return (
+            <motion.article
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="jobnews-card"
+            >
+                <Link to={blogLink} className="jobnews-card-link">
+                    <div className="jobnews-card-content">
+                        <div className="jobnews-text">
+                            <h3>{article.title}</h3>
+                            <p>{article.excerpt || "Tin tức mới về tuyển dụng"}</p>
+
+                            <div className="jobnews-meta">
+                                <span>{article.company}</span>
+                                <span>
+                                    {article.location ? `${article.location} · ` : ""}
+                                    {formatDate(article.date)}
+                                </span>
+                                <span className="read-more-text">Đọc thêm →</span>
+                            </div>
+                        </div>
+
+                        <div className="jobnews-image">
+                            <img
+                                src={newsImages[index % newsImages.length]} // Chọn ảnh theo index
+                                alt={article.title}
+                                loading="lazy"
+                            />
+                        </div>
                     </div>
-                </div>
-
-                <div className="jobnews-image">
-                    <img
-                        src={newsImages[index % newsImages.length]} // Chọn ảnh theo index
-                        alt={article.title}
-                        loading="lazy"
-                    />
-                </div>
-            </div>
-        </motion.article>
-    );
+                </Link>
+            </motion.article>
+        );
+    };
 
     const showSkeletons = isLoading && (!articles || articles.length === 0);
 
@@ -79,7 +93,7 @@ export function JobNews({ articles = [], isLoading = false, onReadMore }) {
         <section className="jobnews">
             <div className="jobnews-header">
                 <h2>Tin tức tuyển dụng</h2>
-                <a href="#news">Xem tất cả</a>
+                <Link to="/blog">Xem tất cả</Link>
             </div>
 
             <div className="jobnews-grid">

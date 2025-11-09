@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/components/ProfileContact.scss';
 
-export default function ProfileContact({ user, isEditing }) {
+export default function ProfileContact({ user, isEditing, onSave, onEdit, onCancel }) {
     const [contactInfo, setContactInfo] = useState({
         phone: user?.phone || '',
         email: user?.email || '',
@@ -11,6 +11,18 @@ export default function ProfileContact({ user, isEditing }) {
         github: user?.github || '',
         skype: user?.skype || ''
     });
+
+    useEffect(() => {
+        setContactInfo({
+            phone: user?.phone || '',
+            email: user?.email || '',
+            address: user?.address || '',
+            website: user?.website || '',
+            linkedin: user?.linkedin || '',
+            github: user?.github || '',
+            skype: user?.skype || ''
+        });
+    }, [user, isEditing]);
 
     const [showContactModal, setShowContactModal] = useState(false);
 
@@ -23,15 +35,10 @@ export default function ProfileContact({ user, isEditing }) {
     };
 
     const handleSaveContact = () => {
-        // Cập nhật thông tin liên hệ trong localStorage
-        const updatedUser = {
-            ...user,
-            ...contactInfo
-        };
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        
-        // Dispatch event để cập nhật header
-        window.dispatchEvent(new Event('user-changed'));
+        const success = onSave?.({ contact: contactInfo });
+        if (success) {
+            onCancel?.();
+        }
     };
 
     const handleContactRequest = () => {
@@ -42,13 +49,31 @@ export default function ProfileContact({ user, isEditing }) {
         setShowContactModal(false);
     };
 
+    const handleCancelEdit = () => {
+        setContactInfo({
+            phone: user?.phone || '',
+            email: user?.email || '',
+            address: user?.address || '',
+            website: user?.website || '',
+            linkedin: user?.linkedin || '',
+            github: user?.github || '',
+            skype: user?.skype || ''
+        });
+        onCancel?.();
+    };
+
     const isPhoneVerified = user?.verification?.phone || false;
     const isEmailVerified = user?.verification?.email || false;
 
     return (
-        <div className="profile-contact">
+        <div className={`profile-contact ${isEditing ? 'is-editing' : ''}`} id="contact">
             <div className="contact-header">
                 <h2>Thông tin liên lạc</h2>
+                {!isEditing && onEdit && (
+                    <button className="section-edit-btn" type="button" onClick={onEdit}>
+                        <i className="fas fa-pen"></i> Chỉnh sửa
+                    </button>
+                )}
             </div>
 
             <div className="contact-content">
@@ -148,9 +173,14 @@ export default function ProfileContact({ user, isEditing }) {
                             />
                         </div>
 
-                        <button className="btn btn-primary" onClick={handleSaveContact}>
-                            Lưu thông tin liên hệ
-                        </button>
+                        <div className="contact-actions">
+                            <button className="btn btn-primary" type="button" onClick={handleSaveContact}>
+                                Lưu thông tin liên hệ
+                            </button>
+                            <button className="btn btn-secondary" type="button" onClick={handleCancelEdit}>
+                                Hủy
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <div className="contact-display">
@@ -226,7 +256,7 @@ export default function ProfileContact({ user, isEditing }) {
                         </div>
 
                         <div className="contact-actions">
-                            <button className="btn btn-primary" onClick={handleContactRequest}>
+                            <button className="btn btn-primary" type="button" onClick={handleContactRequest}>
                                 Liên hệ
                             </button>
                         </div>
@@ -234,17 +264,16 @@ export default function ProfileContact({ user, isEditing }) {
                 )}
             </div>
 
-            {/* Contact Modal */}
             {showContactModal && (
                 <div className="contact-modal-overlay" onClick={handleCloseModal}>
                     <div className="contact-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <h3>Liên hệ trực tiếp</h3>
-                            <button className="close-btn" onClick={handleCloseModal}>
+                            <button className="close-btn" type="button" onClick={handleCloseModal}>
                                 <i className="fas fa-times"></i>
                             </button>
                         </div>
-                        
+
                         <div className="modal-content">
                             {!isPhoneVerified ? (
                                 <div className="verification-warning">
@@ -253,15 +282,15 @@ export default function ProfileContact({ user, isEditing }) {
                                     </div>
                                     <h4>Chưa thể lấy số điện thoại</h4>
                                     <p>
-                                        Freelancer <strong>{user?.name}</strong> chưa xác thực số điện thoại 
-                                        nên chưa thể thực hiện tính năng này. Đối với các freelancer đã xác thực, 
+                                        Freelancer <strong>{user?.name}</strong> chưa xác thực số điện thoại
+                                        nên chưa thể thực hiện tính năng này. Đối với các freelancer đã xác thực,
                                         bạn sẽ nhận được gợi ý lấy số của họ ngay.
                                     </p>
                                     <p>
-                                        Bạn vui lòng gửi yêu cầu freelancer xác thực số điện thoại. 
+                                        Bạn vui lòng gửi yêu cầu freelancer xác thực số điện thoại.
                                         vLance sẽ thông báo cho bạn sau khi freelancer thực hiện yêu cầu.
                                     </p>
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" type="button">
                                         Gửi yêu cầu freelancer xác thực
                                     </button>
                                 </div>
@@ -272,14 +301,14 @@ export default function ProfileContact({ user, isEditing }) {
                                     </div>
                                     <h4>Gửi yêu cầu thành công</h4>
                                     <p>
-                                        Ngay khi freelancer {user?.name} xác thực, vLance sẽ thông báo tới bạn 
+                                        Ngay khi freelancer {user?.name} xác thực, vLance sẽ thông báo tới bạn
                                         để lấy số điện thoại.
                                     </p>
                                     <p>
-                                        <strong>Lưu ý:</strong> Bạn và freelancer vẫn có thể tiếp tục nhắn tin 
+                                        <strong>Lưu ý:</strong> Bạn và freelancer vẫn có thể tiếp tục nhắn tin
                                         trên Gói dịch vụ để được lưu trữ thông tin trao đổi trên hệ thống vLance.
                                     </p>
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" type="button">
                                         Tiếp tục nhắn tin trao đổi
                                     </button>
                                 </div>
